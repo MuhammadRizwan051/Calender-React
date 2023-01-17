@@ -1,3 +1,49 @@
+*{
+    cursor: pointer;
+}
 ion-icon{
-    font-size: 30px;
+    font-size: 25px;
+    color: white;
+}
+
+@media screen and (min-width:1600px) {
+    .shadow{
+        width: 40%;
+    }
+}
+ @media screen and (max-width:1599px) {
+    .shadow{
+        width: 50%;
+    }
+}
+@media screen and (max-width:1300px) {
+    .shadow{
+        width: 60%;
+    }
+}
+@media screen and (max-width:1000px) {
+    .shadow{
+        width: 70%;
+    }
+}
+@media screen and (max-width:800px) {
+    .shadow{
+        width: 85%;
+    }
+}
+@media screen and (max-width:680px) {
+    .shadow{
+        width: 90%;
+    }
+}
+@media screen and (max-width:580px) {
+    .shadow{
+        width: 100%;
+    }
+}
+.hover:hover{
+    background-color: #2D89FF;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s ease;
 }

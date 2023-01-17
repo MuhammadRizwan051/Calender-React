@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import bgImage from './assets/bgImage.jfif'
 
 
 function App() {
@@ -14,17 +15,12 @@ function App() {
 
   const getDays = () => {
     let day = new Date(fullYear, monthLength + 1, 0)
-    console.log(day)
+    // console.log(day)
     setTotalDay(day.getDate())
-    setMonthStart(day.getDay())
     setFullYear(day.getFullYear())
 
-    let currentDate = new Date().getDate()
-    let filterCurrentDate = all.filter((e, i) => {
-      return e == currentDate
-    })
-    console.log(filterCurrentDate)
-    // console.log(currentDate)
+    let currentDay = new Date(fullYear, monthLength, 1).getDay()
+    setMonthStart(currentDay)
   }
 
   useEffect(() => {
@@ -73,35 +69,39 @@ function App() {
 
   return (
     <>
-      <Box sx={{ height: '100vh', border: '1px solid', margin: 5 }}>
+      <Box sx={{ height: '99vh', bgcolor: '#78ACCD', backgroundImage: `url("https://images2.alphacoders.com/993/993073.jpg")`, backgroundRepeat:'no-repeat', backgroundAttachment: 'fixed', backgroundSize: '100% 100%' }}>
 
-        <Box sx={{ width: '100%', height: '40px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingY: 3 }}>
-          <Box>
-            <ion-icon name="arrow-back-outline" onClick={yearBackward}></ion-icon>
-            <ion-icon name="arrow-back-outline" onClick={monthBackward}></ion-icon>
-          </Box>
-          <Typography sx={{ fontSize: 35 }}>{MONTH[monthLength] + " " + fullYear}</Typography>
-          <Box>
-            <ion-icon name="arrow-forward-outline" onClick={monthForward}></ion-icon>
-            <ion-icon name="arrow-forward-outline" onClick={yearForward}></ion-icon>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '200px' }}>
+          <Box className='shadow' sx={{ bgcolor: '#232425' }}>
+
+            <Box sx={{ height: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingY: 3 }}>
+              <ion-icon name="chevron-back" onClick={yearBackward}></ion-icon>
+              <ion-icon name="arrow-back-outline" onClick={monthBackward}></ion-icon>
+              <Typography sx={{ fontSize: 30, color: 'white' }}>{MONTH[monthLength] + " " + fullYear}</Typography>
+              <ion-icon name="arrow-forward-outline" onClick={monthForward}></ion-icon>
+              <ion-icon name="chevron-forward" onClick={yearForward}></ion-icon>
+            </Box>
+
+            <Grid container>
+              {DAYS.map((e, i) => (
+                <Grid item xs={1.714285} key={i} sx={{ bgcolor: 'white', color: '#232425' }}>
+                  <Typography sx={{ textAlign: 'center', paddingY: 2, fontSize: 20, fontWeight: 'bold' }}>{e}</Typography>
+                </Grid>
+              ))}
+              {Array.from({ length: monthStart }).map((_, index) => (
+                <Grid item key={index} xs={1.714285} className='hover'>
+                  <Typography sx={{ color: '#232425' }}>''</Typography>
+                </Grid>
+              ))}
+              {all.map((e, i) => (
+                <Grid item key={i} xs={1.714285} className='hover'>
+                  <Typography className='number' sx={{ textAlign: 'center', paddingY: 2, marginX: 1, fontSize: 20, color: 'white' }}>{e}</Typography>
+                </Grid>
+              ))}
+            </Grid>
+
           </Box>
         </Box>
-
-        <Grid container>
-          {DAYS.map((e, i) => (
-            <Grid item sm={1.71} key={i}>
-              <Typography sx={{ textAlign: 'center', border: '1px solid black', paddingY: 3, fontSize: 30, fontWeight: 'bold' }}>{e}</Typography>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Grid container sx={{ width: '100%' }}>
-          {all.map((e, i) => (
-            <Grid item key={i} sm={1.71}>
-              <Typography sx={{ textAlign: 'center', border: '1px solid black', paddingY: 5, fontSize: 30 }}>{e}</Typography>
-            </Grid>
-          ))}
-        </Grid>
 
       </Box>
     </>
